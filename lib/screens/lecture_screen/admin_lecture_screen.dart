@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:trpo_app/screens/api_data/api_data.dart';
 import 'package:trpo_app/screens/difficulty_indicator/difficulty_indicator.dart';
+import 'package:trpo_app/screens/practice_screen/practice_screen.dart';
+import 'package:trpo_app/screens/test_screen/test_screen.dart';
 import 'dart:convert';
 
 import '../admin_screen/admin_screen.dart';
@@ -185,6 +187,34 @@ class _AdminLectureScreenState extends State<AdminLectureScreen> {
         actions: [
           if (_currentPageIndex == 0)
             IconButton(
+              icon: const Icon(Icons.assignment),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const TestScreen(),
+                  ),
+                );
+              },
+              tooltip: 'Открыть Тесты',
+            ),
+          if (_currentPageIndex == 0)
+            IconButton(
+              icon: const Icon(Icons.book),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const PracticeScreen(
+                      url: ApiData.practiceUrl,
+                    ),
+                  ),
+                );
+              },
+              tooltip: 'Перейти к практике',
+            ),
+          if (_currentPageIndex == 0)
+            IconButton(
               icon: const Icon(
                 Icons.add,
               ),
@@ -257,11 +287,15 @@ class _AdminLectureScreenState extends State<AdminLectureScreen> {
                     ),
                     subtitle: Padding(
                       padding: const EdgeInsets.only(top: 8),
-                      child: Row(
+                      child: Column(
                         children: [
-                          DifficultyIndicator(
-                              difficulty: lecture['difficulty'] ?? ''),
-                          const SizedBox(width: 8),
+                          Row(
+                            children: [
+                              DifficultyIndicator(
+                                  difficulty: lecture['difficulty'] ?? ''),
+                              const SizedBox(width: 8),
+                            ],
+                          ),
                         ],
                       ),
                     ),
@@ -333,17 +367,21 @@ class _AdminLectureScreenState extends State<AdminLectureScreen> {
                             );
                           },
                         ),
-                        IconButton(
-                          icon: const Icon(
-                            Icons.arrow_forward_ios,
-                            color: Color.fromRGBO(236, 126, 74, 1),
-                          ),
-                          onPressed: () {
-                            openLectureDetail(lecture);
-                          },
+                        const Icon(
+                          Icons.arrow_forward_ios,
+                          color: Color.fromRGBO(236, 126, 74, 1),
                         ),
                       ],
                     ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              AdminLectureDetailScreen(lecture: lecture),
+                        ),
+                      );
+                    },
                   ),
                 );
               },

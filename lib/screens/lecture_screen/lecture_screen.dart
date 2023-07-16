@@ -5,6 +5,8 @@ import 'package:trpo_app/screens/difficulty_indicator/difficulty_indicator.dart'
 import 'dart:convert';
 import 'package:trpo_app/screens/lecture_detail_screen/lecture_detail_screen.dart';
 import 'package:trpo_app/screens/login_screen/login_student_screen.dart';
+import 'package:trpo_app/screens/practice_screen/practice_screen.dart';
+import 'package:trpo_app/screens/test_screen/test_screen.dart';
 
 class LectureScreen extends StatefulWidget {
   const LectureScreen({super.key});
@@ -55,12 +57,41 @@ class _LectureScreenState extends State<LectureScreen> {
         automaticallyImplyLeading: false,
         backgroundColor: const Color.fromRGBO(55, 61, 65, 1),
         title: const Text('Лекции'),
-        actions: [
+        actions: <Widget>[
+          Row(
+            children: [
+              IconButton(
+                icon: const Icon(Icons.assignment),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const TestScreen(),
+                    ),
+                  );
+                },
+                tooltip: 'Открыть Тесты',
+              ),
+              IconButton(
+                icon: const Icon(Icons.book),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const PracticeScreen(
+                        url: ApiData.practiceUrl,
+                      ),
+                    ),
+                  );
+                },
+                tooltip: 'Перейти к практике',
+              ),
+            ],
+          ),
           IconButton(
-            icon: const Icon(
-              Icons.exit_to_app,
-            ),
+            icon: const Icon(Icons.exit_to_app),
             onPressed: _goToLoginStudentScreen,
+            tooltip: 'Выйти',
           ),
         ],
       ),
@@ -107,11 +138,15 @@ class _LectureScreenState extends State<LectureScreen> {
                 ),
                 subtitle: Padding(
                   padding: const EdgeInsets.only(top: 8),
-                  child: Row(
+                  child: Column(
                     children: [
-                      DifficultyIndicator(
-                          difficulty: lecture['difficulty'] ?? ''),
-                      const SizedBox(width: 8),
+                      Row(
+                        children: [
+                          DifficultyIndicator(
+                              difficulty: lecture['difficulty'] ?? ''),
+                          const SizedBox(width: 8),
+                        ],
+                      ),
                     ],
                   ),
                 ),

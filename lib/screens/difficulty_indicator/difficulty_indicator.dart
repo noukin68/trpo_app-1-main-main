@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class DifficultyIndicator extends StatelessWidget {
   final String difficulty;
 
-  const DifficultyIndicator({required this.difficulty});
+  const DifficultyIndicator({super.key, required this.difficulty});
 
   @override
   Widget build(BuildContext context) {

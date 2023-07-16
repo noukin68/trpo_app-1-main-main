@@ -9,17 +9,19 @@ import '../lecture_screen/admin_lecture_screen.dart';
 class AdminLectureDetailScreen extends StatelessWidget {
   final dynamic lecture;
 
-  const AdminLectureDetailScreen({Key? key, required this.lecture}) : super(key: key);
+  const AdminLectureDetailScreen({Key? key, required this.lecture})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-     final String descriptionString = lecture['description'];
-     final List<dynamic> descriptionList = jsonDecode(descriptionString);
+    final String descriptionString = lecture['description'];
+    final List<dynamic> descriptionList = jsonDecode(descriptionString);
     return WillPopScope(
       onWillPop: () async {
         Navigator.pushReplacement(
           context,
-          material.MaterialPageRoute(builder: (BuildContext context) => const AdminLectureScreen()),
+          material.MaterialPageRoute(
+              builder: (BuildContext context) => const AdminLectureScreen()),
         );
         return false;
       },
@@ -30,19 +32,10 @@ class AdminLectureDetailScreen extends StatelessWidget {
           title: const material.Text('Детали лекции'),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(10.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              material.Text(
-                lecture['title'],
-                style: const TextStyle(
-                  color: Color.fromRGBO(236, 126, 74, 1),
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 16),
               Expanded(
                 child: LayoutBuilder(
                   builder: (BuildContext context, BoxConstraints constraints) {
@@ -56,11 +49,11 @@ class AdminLectureDetailScreen extends StatelessWidget {
                       autoFocus: false,
                       expands: true,
                       focusNode: FocusNode(),
-                      padding: const EdgeInsets.all(16.0),
+                      padding: const EdgeInsets.all(10.0),
                       scrollController: ScrollController(),
                       maxHeight: constraints.maxHeight -
-                        material.kToolbarHeight -
-                        48.0,
+                          material.kToolbarHeight -
+                          48.0,
                     );
                   },
                 ),

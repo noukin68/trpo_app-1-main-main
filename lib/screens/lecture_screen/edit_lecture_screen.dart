@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart' as material;
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:trpo_app/screens/api_data/api_data.dart';
 import 'package:flutter_quill/flutter_quill.dart';
@@ -12,6 +11,7 @@ class EditLectureScreen extends StatefulWidget {
   const EditLectureScreen({Key? key, required this.lecture}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _EditLectureScreenState createState() => _EditLectureScreenState();
 }
 
@@ -51,13 +51,15 @@ class _EditLectureScreenState extends State<EditLectureScreen> {
 
       if (response.statusCode == 200) {
         // Lecture successfully updated
+        // ignore: use_build_context_synchronously
         Navigator.pop(context, true); // Return to the previous screen
       } else {
         showErrorMessage('Error updating the lecture');
       }
     } catch (e) {
       // Handle request sending errors
-      print('Error sending the request: $e');
+      // ignore: avoid_print
+      print('Error sending the request');
     }
   }
 

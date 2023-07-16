@@ -151,7 +151,8 @@ class _AddLectureScreenState extends State<AddLectureScreen> {
         showErrorMessage('Ошибка при добавлении лекции');
       }
     } catch (e) {
-      print('Ошибка при отправке запроса: $e');
+      // ignore: avoid_print
+      print('Ошибка при отправке запроса');
     }
   }
 
